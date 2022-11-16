@@ -71,6 +71,22 @@ pipeline{
                 }
             }
         }
+        stage('Pushing the helm charts to nexus repo'){
+
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
+                        dir('kubernetes/') {
+                         sh '''
+                         helmversion=$(helm show chart myapp | grep version | cut -d: -f 2 | tr -d ' ')
+                         tar -czvf myapp-${helmversion}.tgz myapp/
+                         curl -u admin:$nexus_creds http://3.83.66.55:8081/repository/helm-repo/ --upload-file myapp-${helmversion}.tgz -v 
+                         '''
+                }
+              }
+             }
+            }
+        }
     }
     post {
 		always {

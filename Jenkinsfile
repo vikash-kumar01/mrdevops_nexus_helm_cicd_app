@@ -40,10 +40,6 @@ pipeline{
             script{
                  withCredentials([string(credentialsId: 'nexus_password', variable: 'nexus_cred')]) {
     // some block
-}
-}
-}
-         }
 
                 sh '''
                 docker build -t  44.192.39.247:8083/springapp:${VERSION} .
@@ -59,8 +55,10 @@ pipeline{
             }
         }
         
+         }
+     }
         
-
-        
+    }
+}
         
         

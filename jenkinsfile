@@ -11,7 +11,7 @@ pipeline{
             steps{
 
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token') { 
+                    withSonarQubeEnv(credentialsId: 'sonar-newtoken') { 
 
                         sh 'mvn clean package sonar:sonar'
 
@@ -21,4 +21,13 @@ pipeline{
         }
         
     }
+    stage ('Quality Gate status'){
+        steps {
+            script{
+
+             waitForQualityGate abortPipeline: false, credentialsId: 'sonar-newtoken'
+        }
+    }
 }
+
+

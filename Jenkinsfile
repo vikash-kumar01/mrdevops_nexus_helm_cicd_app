@@ -62,7 +62,7 @@ pipeline{
             script{
                 dir('kubernetes/myapp/') {
 
-                    sh 'helm datree test .'
+                    sh 'helm datree test  .'
             }
         }
      }

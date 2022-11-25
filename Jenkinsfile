@@ -45,21 +45,18 @@ pipeline{
 }
 
                 sh '''
-                docker bild -t app-test 44.192.39.247:8083/springapp:${VERSION}
+                docker bild -t app-test 44.192.39.247:8083/springapp:${VERSION} .
+
+                docker login -u admin -p $nexus_secret 44.192.39.247:8083
+
+                docker push 44.192.39.247:8083/springapp:${VERSION}
                 ''''
             }
         }
+        
+        }
 
-    }
-
-
-
-
-
-
-
-
-    }
-}
-
-
+        }
+        }
+        }
+        }

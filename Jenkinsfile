@@ -1,5 +1,8 @@
 pipeline{
     agent any 
+    environment {
+        VERSION = "$(env.BUILD_ID)"
+    }
     stages{
 
         stage('sonar quality status'){
@@ -11,6 +14,7 @@ pipeline{
             steps{
 
                 script{
+
                     withSonarQubeEnv(credentialsId: 'sonar-newtoken') { 
 
                         sh 'mvn clean package sonar:sonar'
@@ -26,7 +30,35 @@ pipeline{
             script{
 
              waitForQualityGate abortPipeline: false, credentialsId: 'sonar-newtoken'
+            }
+    }
+
+}
+
+    stage('docker build & docker push to nexus repo'){
+        steps{
+            script{
+
+
+                withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_secret')]) {
+    // some block
+}
+
+                sh '''
+                docker bild -t app-test 44.192.39.247:8083/springapp:${VERSION}
+                ''''
+            }
         }
+
+    }
+
+
+
+
+
+
+
+
     }
 }
 

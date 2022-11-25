@@ -38,9 +38,9 @@ pipeline{
     stage('docker build & docker push to nexus repo'){
         steps{
             script{
-
-                 withCredentials([string(credentialsId: 'nexus_passwdd', variable: 'nexus_secret')]) {
+                 withCredentials([string(credentialsId: 'nexus_password', variable: 'nexus_cred')]) {
     // some block
+}
 }
 }
 

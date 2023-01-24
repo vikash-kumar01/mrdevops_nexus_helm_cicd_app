@@ -1,6 +1,6 @@
 pipeline{
 
-    gent any
+    agent any
 
     stages{
 

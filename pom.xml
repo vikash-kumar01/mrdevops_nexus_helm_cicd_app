@@ -53,14 +53,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-    <groupId>pl.project13.maven</groupId>
-    <artifactId>git-commit-id-plugin</artifactId>
-    <version>4.0.0</version>
-    <configuration>
-        <verbose>false</verbose>
-        <useNativeGit>true</useNativeGit>
-    </configuration>
-</plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+			</plugin>
 		</plugins>
 		<finalName>devops-integration</finalName>
 	</build>
